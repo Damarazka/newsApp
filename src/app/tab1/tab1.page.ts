@@ -26,7 +26,7 @@ export class Tab1Page implements OnInit {
       this.isOffline = true;
     }
 
-    this.getdata.doGet('business').subscribe(res => {
+    this.getdata.doGet('general').subscribe(res => {
       this.data = res;
       this.isLoading = false;
       this.loadingController.dismiss();
