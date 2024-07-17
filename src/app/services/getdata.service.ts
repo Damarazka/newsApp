@@ -7,12 +7,15 @@ import { from } from 'rxjs';
 })
 export class GetdataService {
 
+  apiKey: string = '516319ebc5104926b8fdf746a1abe7d3';
+
   constructor() { }
 
-  doGet = () => {
+  doGet(category: string) {
     const options = {
-      url: 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=516319ebc5104926b8fdf746a1abe7d3',
-    }
-    return from(Http.get(options))
+      url: `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${this.apiKey}`,
+    };
+    return from(Http.get(options));
   }
 }
+
