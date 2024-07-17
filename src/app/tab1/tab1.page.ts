@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GetdataService } from '../services/getdata.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  data : any
+  constructor(public getdata : GetdataService) {}
+
+  ngOnInit(){
+    this.getdata.doGet().subscribe(res =>{
+      this.data = res.data.articles
+      console.log(this.data)
+    })
+  }
 
 }

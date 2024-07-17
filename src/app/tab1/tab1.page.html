@@ -1,17 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      News
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card *ngFor="let article of data">
+    <ion-card-header>
+      <img [src]="article.urlToImage">
+      <ion-card-subtitle>{{article.author}} - {{article.publishedAt}}</ion-card-subtitle>
+      <ion-card-title>{{article.title}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{article.description}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
