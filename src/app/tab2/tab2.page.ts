@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetdataService } from '../services/getdata.service';
+import { LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -8,21 +9,31 @@ import { GetdataService } from '../services/getdata.service';
 })
 export class Tab2Page implements OnInit {
 
-  data: any;
+  data: any = [];
   isLoading = true;
-  loadingController: any;
+  isOffline = false;
 
-  constructor(public getdata: GetdataService) {}
+  constructor(
+    public getdata: GetdataService,
+    public loadingController: LoadingController,
+    public alertController: AlertController
+  ) {}
 
-  ngOnInit() {
-    this.presentLoading();
+  async ngOnInit() {
+    await this.presentLoading();
+    const isConnected = await this.getdata.checkNetworkStatus();
+    if (!isConnected) {
+      this.isOffline = true;
+    }
+
     this.getdata.doGet('technology').subscribe(res => {
-      this.data = res.data.articles;
-      console.log(this.data);
+      this.data = res;
       this.isLoading = false;
+      this.loadingController.dismiss();
     }, err => {
       console.error(err);
       this.isLoading = false;
+      this.loadingController.dismiss();
     });
   }
 
