@@ -13,9 +13,15 @@
   <ion-loading *ngIf="isLoading" message="Please wait..." duration="0"></ion-loading>
 
   <div *ngIf="isOffline && data.length === 0">
-    <ion-text color="danger">
-      <h2>Silahkan connect ke internet</h2>
-    </ion-text>
+    <ion-card>
+      <ion-card-header>
+        <img src="assets/nointernews.png" alt="">
+        <ion-title color="danger">There is no INTERNET</ion-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle>You can connect INTERNET first and you can read news</ion-card-subtitle>
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <ng-container *ngIf="!isOffline || data.length > 0" >
