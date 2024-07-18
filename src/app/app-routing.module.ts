@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'detail',
     loadChildren: () => import('./pages/detail/detail.module').then(m => m.DetailPageModule)
+  },
+  {
+    path: 'splash',
+    loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
   }
 ];
 
