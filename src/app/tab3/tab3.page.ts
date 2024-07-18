@@ -12,6 +12,7 @@ export class Tab3Page implements OnInit {
   data: any = [];
   isLoading = true;
   isOffline = false;
+  searchQuery: string = '';
 
   constructor(
     public getdata: GetdataService,
@@ -43,5 +44,20 @@ export class Tab3Page implements OnInit {
       duration: 0
     });
     await loading.present();
+  }
+
+  searchNews() {
+    if (this.searchQuery.trim().length > 0) {
+      this.isLoading = true;
+      this.getdata.searchNews(this.searchQuery).subscribe(res => {
+        this.data = res;
+        this.isLoading = false;
+      }, err => {
+        console.error(err);
+        this.isLoading = false;
+      });
+    } else {
+      this.ngOnInit();  // Re-fetch general news if search query is empty
+    }
   }
 }

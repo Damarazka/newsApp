@@ -4,6 +4,7 @@ import { from, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Preferences } from '@capacitor/preferences';
 import { Network } from '@capacitor/network';
+import { RuleTester } from 'eslint';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,18 @@ export class GetdataService {
         return cachedData || [];
       })
     );
+  }
+
+  searchNews(query : string){
+    const options = {
+      url: `https://newsapi.org/v2/everything?q=${query}&apiKey=${this.apiKey}`
+    }
+    return from(Http.get(options)).pipe(
+      map(response => response.data.articles),
+      catchError(err => {
+        console.error('Error fetching search results', err)
+        return of([])
+      })
+    )
   }
 }

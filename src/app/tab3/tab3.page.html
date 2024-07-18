@@ -1,8 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-item>
     <ion-title>
       News
     </ion-title>
+  </ion-item>
+    <ion-searchbar  [(ngModel)]="searchQuery" (ionInput)="searchNews()" ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
