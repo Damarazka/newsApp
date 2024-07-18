@@ -18,8 +18,8 @@
     </ion-text>
   </div>
 
-  <ng-container *ngIf="!isOffline || data.length > 0">
-    <ion-card *ngFor="let article of data">
+  <ng-container *ngIf="!isOffline || data.length > 0" >
+    <ion-card *ngFor="let article of data" (click)="goToDetail(article)">
       <ion-card-header>
         <img [src]="article.urlToImage">
         <ion-card-subtitle>{{article.author}} - {{article.publishedAt}}</ion-card-subtitle>

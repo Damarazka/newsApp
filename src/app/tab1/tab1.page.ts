@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetdataService } from '../services/getdata.service';
 import { LoadingController, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -17,7 +18,8 @@ export class Tab1Page implements OnInit {
   constructor(
     public getdata: GetdataService,
     public loadingController: LoadingController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -57,7 +59,14 @@ export class Tab1Page implements OnInit {
         this.isLoading = false;
       });
     } else {
-      this.ngOnInit();  // Re-fetch general news if search query is empty
+      this.data = [];
     }
+  }
+
+  goToDetail(article: any) {
+    console.log('Navigating to detail with article:', article);
+    this.router.navigate(['/detail'], {
+      queryParams: { article: JSON.stringify(article) }
+    });
   }
 }

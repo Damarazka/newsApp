@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon name="arrow-back"></ion-icon>
+          Back
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img [src]="article.urlToImage">
+    <ion-card-header>
+      <ion-card-subtitle>{{ article.author }} - {{ article.publishedAt }}</ion-card-subtitle>
+      <ion-card-title>{{ article.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ article.content || article.description }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
